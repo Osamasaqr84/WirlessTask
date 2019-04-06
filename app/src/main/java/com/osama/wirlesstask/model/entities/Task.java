@@ -1,4 +1,4 @@
-package com.osama.wirlesstask.entities;
+package com.osama.wirlesstask.model.entities;
 
 
 import android.arch.persistence.room.ColumnInfo;

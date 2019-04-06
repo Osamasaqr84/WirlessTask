@@ -3,8 +3,8 @@ package com.osama.wirlesstask.presentation.viewModel;
 import android.app.Application;
 import android.arch.lifecycle.ViewModelProvider;
 import android.support.annotation.NonNull;
-import com.osama.wirlesstask.entities.LocalDatabase;
-import com.osama.wirlesstask.entities.deo.TaskDeo;
+import com.osama.wirlesstask.model.lacaldatabase.LocalDatabase;
+import com.osama.wirlesstask.model.lacaldatabase.deo.TaskDeo;
 import com.osama.wirlesstask.repositries.TaskRepositry;
 
 public class ViewModelFactory implements ViewModelProvider.Factory {

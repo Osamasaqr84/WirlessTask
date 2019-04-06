@@ -1,16 +1,14 @@
-package com.osama.wirlesstask.entities.deo;
+package com.osama.wirlesstask.model.lacaldatabase.deo;
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
 import android.arch.persistence.room.Insert;
 import android.arch.persistence.room.Query;
 import android.arch.persistence.room.Update;
-import com.osama.wirlesstask.entities.Task;
+import com.osama.wirlesstask.model.entities.Task;
 
 import java.util.List;
 
-import io.reactivex.Flowable;
-import io.reactivex.Observable;
 import io.reactivex.Single;
 
 import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
@@ -23,7 +21,7 @@ public interface TaskDeo {
     public Long insertTask(Task productDeo);
 
     @Update
-    public void upateProduct(Task task);
+    public int upateProduct(Task task);
 
     @Delete
     public void deleteProduct(Task task);

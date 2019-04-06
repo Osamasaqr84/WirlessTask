@@ -1,6 +1,5 @@
 package com.osama.wirlesstask.presentation.feture.taskslist.adapter;
 
-import android.arch.lifecycle.Observer;
 import android.support.annotation.NonNull;
 import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.RecyclerView;
@@ -8,23 +7,21 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.osama.wirlesstask.R;
-import com.osama.wirlesstask.entities.Task;
+import com.osama.wirlesstask.model.entities.Task;
+import com.osama.wirlesstask.presentation.feture.taskslist.MainActivity;
 
 import java.util.List;
 
 
 public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.CustomView> {
 
-
     private FragmentActivity context;
     private  List<Task> taskList;
-    public TasksAdapter(FragmentActivity activity, List<Task> tasks) {
 
+    public TasksAdapter(FragmentActivity activity, List<Task> tasks) {
         this.context = activity;
         taskList = tasks;
     }
@@ -37,7 +34,6 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.CustomView> 
                 .inflate(R.layout.task_item, parent, false);
 
         return new TasksAdapter.CustomView(view);
-
     }
 
 
@@ -47,12 +43,18 @@ public class TasksAdapter extends RecyclerView.Adapter<TasksAdapter.CustomView> 
         holder.title.setText(taskList.get(position).getTasktitle());
         holder.description.setText(taskList.get(position).getTaskdescription());
         holder.isdone.setChecked(taskList.get(position).getIsDone());
+            if (!taskList.get(position).getIsDone())
+            MainActivity.undonetasks +=1;
 
-        holder.isdone.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+        holder.isdone.setOnCheckedChangeListener((buttonView, isChecked) -> {
+            taskList.get(position).setIsDone(isChecked);
+            //notifyDataSetChanged();
+            if (!isChecked)
+                MainActivity.undonetasks +=1;
+            else
+                MainActivity.undonetasks -=1;
 
-            }
+            ((MainActivity)context).changeStatues(taskList.get(position));
         });
     }
 

@@ -1,19 +1,12 @@
 package com.osama.wirlesstask.usecases;
 
 import android.arch.lifecycle.MutableLiveData;
-import android.util.Log;
 
-import com.osama.wirlesstask.entities.Task;
+import com.osama.wirlesstask.model.entities.Task;
 import com.osama.wirlesstask.repositries.TaskRepositry;
 
-import org.reactivestreams.Subscription;
-
 import java.util.List;
-import java.util.concurrent.Callable;
 
-import io.reactivex.Flowable;
-import io.reactivex.FlowableSubscriber;
-import io.reactivex.Observer;
 import io.reactivex.SingleObserver;
 import io.reactivex.disposables.Disposable;
 
@@ -24,7 +17,6 @@ public class TaskUseCases {
         repositry.getAllTasks().subscribe(new SingleObserver<List<Task>>() {
             @Override
             public void onSubscribe(Disposable d) {
-
             }
 
             @Override
@@ -37,34 +29,31 @@ public class TaskUseCases {
 
             }
         });
-        //       repositry.getAllTasks().subscribe(new FlowableSubscriber<List<Task>>() {
-//           @Override
-//           public void onSubscribe(Subscription s) {
-//            Log.d("d","fs");
-//           }
-//
-//           @Override
-//           public void onNext(List<Task> tasks) {
-//            tasksLivedata.postValue(tasks);
-//           }
-//
-//           @Override
-//           public void onError(Throwable t) {
-//            Log.d("as",t.toString());
-//           }
-//
-//           @Override
-//           public void onComplete() {
-//               Log.d("as","complete");
-//
-//           }
-//       });
     }
 
-    public static  void AddTask (TaskRepositry repositry ,Task  task)
+    public static  void AddTask(TaskRepositry repositry, Task task, MutableLiveData<String> validate, MutableLiveData<Boolean> addStatues)
     {
-        repositry.AddTask(task);
+        if (validateInput(task,validate)) {
+            repositry.AddTask(task);
+            addStatues.postValue(true);
+        }
+        else
+            addStatues.postValue(false);
     }
 
+    private static boolean validateInput(Task task, MutableLiveData<String> validate)
+    {
+        if (task.getTasktitle().matches("")||task.getTaskdescription().matches(""))
+        {
+            validate.postValue("please complete data fielda");
+            return false;
+        }
+        else
+            return true;
+    }
+    public static  void updateTaskStatues (TaskRepositry repositry ,Task  task)
+    {
+        repositry.editTaskStatues(task);
+    }
 
 }

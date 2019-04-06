@@ -16,4 +16,16 @@
         />
 
 
+    <TextView
+        android:id="@+id/notfound"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintWidth_percent="0.6"
+        android:visibility="gone"
+        android:text="you do not have any tasks,you can click in plus below to add you first task"
+        />
+
 </android.support.constraint.ConstraintLayout>

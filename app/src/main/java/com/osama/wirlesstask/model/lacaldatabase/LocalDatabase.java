@@ -1,4 +1,4 @@
-package com.osama.wirlesstask.entities;
+package com.osama.wirlesstask.model.lacaldatabase;
 
 
 import android.arch.persistence.db.SupportSQLiteDatabase;
@@ -6,9 +6,10 @@ import android.arch.persistence.room.Database;
 import android.arch.persistence.room.Room;
 import android.arch.persistence.room.RoomDatabase;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.support.annotation.NonNull;
-import com.osama.wirlesstask.entities.deo.TaskDeo;
+
+import com.osama.wirlesstask.model.entities.Task;
+import com.osama.wirlesstask.model.lacaldatabase.deo.TaskDeo;
 
 @Database(entities = {Task.class}
         ,version = 1,exportSchema = false)
